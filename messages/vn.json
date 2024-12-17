@@ -1,0 +1,28 @@
+{
+    "mobilephone": "Số điện thoại",
+    "identificationNumber": "Số giấy tờ tuỳ thân",
+    "email": "Email",
+    "customerName": "Họ tên người đăng ký",
+    "merchantName": "Tên cửa hàng",
+    "merchantAddress": "Địa chỉ cửa hàng",
+    "accountNumber": "Tài khoản thanh toán",
+    "virtualAccountNumber": "Số tài khoản ảo",
+    "placeHolderAccountNumber": "Vui lòng nhập số tài khoản tại OCB",
+    "notHaveOcbAccount": "Chưa có tài khoản thanh toán OCB",
+    "next": "Tiếp theo",
+    "back": "Quay lại",
+    "confirm": "Xác nhận",
+    "success": "Hoàn tất",
+    "registerInformation": "Thông tin đăng ký Merchant Việt QR",
+    "authenticOtp": "Xác thực OTP",
+    "service": "Dịch vụ Merchant Việt QR",
+    "inputOTP": "Nhập mã OTP",
+    "notReciveOTP": "Bạn chưa nhận được mã OTP?",
+    "resent": "Gửi lại",
+    "registerSuccess": "Đăng ký thành công",
+    "Error": {
+        "phoneError": "Sai định dạng số điện thoại",
+        "identificationError": "Sai định dạng số giấy tờ tuỳ thân",
+        "accountError": "Sai định dạng số tài khoản thanh toán"
+    }
+}

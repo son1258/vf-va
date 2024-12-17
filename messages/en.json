@@ -1,0 +1,28 @@
+{
+    "mobilephone": "Phone Number",
+    "identificationNumber": "Identification Number",
+    "email": "Email",
+    "customerName": "Customer Name",
+    "merchantName": "Merchant Name",
+    "merchantAddress": "merchant Address",
+    "accountNumber": "Account Number",
+    "virtualAccountNumber": "Virtual Account Number",
+    "placeHolderAccountNumber": "Please enter account number at OCB",
+    "notHaveOcbAccount": "Not have OCB account",
+    "next": "Next",
+    "back": "Back",
+    "confirm": "Confirm",
+    "success": "Success",
+    "registerInformation": "Register information Merchant Viet QR",
+    "authenticOtp": "Authentic OTP",
+    "service": "Merchant Viet QR service",
+    "inputOTP": "Enter OTP code",
+    "notReciveOTP": "Are you not recive OTP code?",
+    "resent": "Resent",
+    "registerSuccess": "Register Success",
+    "Error": {
+        "phoneError": "Wrong phone number format",
+        "identificationError": "Wrong identification number format",
+        "accountError": "Wrong account number format"
+    }
+}
