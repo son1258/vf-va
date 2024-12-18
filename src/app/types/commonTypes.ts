@@ -4,28 +4,10 @@ export type TitleProps = {
     titleStyles?: string
 }
 
-export type ButtonProps = {
+export type HeaderDesktopProps = {
     name: string,
-    containerStyles?: string,
-}
-
-export type FieldProps = {
-    nameField: string,
-    keyField?: string,
-    containerStyles?: string,
-    inputFieldStyles?: string,
-    placeHolder?: string,
-    disabled?: boolean,
-    required?: boolean
-}
-
-export type UserFormValuesProps = {
-    phone: string,
-    nic: string,
-    email: string,
-    registerName: string,
-    storeName: string,
-    storeAddress: string,
-    paymentAccount: string,
-    virtualAccountNumber?: string,
+    icon: any,
+    containerStyles?: string, 
+    iconStyles?: string, 
+    spanStyles?: string
 }
