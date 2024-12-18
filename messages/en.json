@@ -7,6 +7,7 @@
     "merchantAddress": "merchant Address",
     "accountNumber": "Account Number",
     "virtualAccountNumber": "Virtual Account Number",
+    "virtualAccountInformation": "Virtual Account Information",
     "placeHolderAccountNumber": "Please enter account number at OCB",
     "notHaveOcbAccount": "Not have OCB account",
     "next": "Next",
