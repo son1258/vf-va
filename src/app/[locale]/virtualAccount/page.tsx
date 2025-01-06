@@ -1,7 +1,8 @@
+"use client"
+
 import Title from '@/app/components/title';
 import { useTranslations } from 'next-intl';
-import React from 'react';
-import { userInputFiled } from '@/constants';
+import React, { useState } from 'react';
 import { Button } from '@mui/material';
 import Link from 'next/link';
 import { routing } from '@/i18n/routing';
@@ -10,9 +11,31 @@ import VAIcon from '@/../public/va.svg';
 import AuthIcon from '@/../public/authenticate.svg';
 import SuccessIcon from '@/../public/done.svg';
 import FilledIcon from '@/../public/filled.svg';
+import { useRouter } from 'next/navigation';
+import RecaptchaComponent from '@/app/components/recapcha';
 
 const VirtualAcount = () => {
     const translate = useTranslations();
+    const router = useRouter();
+    const getDataUser = localStorage.getItem('dataUser');
+    const dataUser = getDataUser ? JSON.parse(getDataUser) : null;
+    const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
+
+    const handleRecapchaChange = (token: string | null) => {
+        if (token) {
+            setRecaptchaToken(token);
+        }
+    }
+
+    const handleNextPage = () => {
+        if (recaptchaToken) {
+            router.push(`/${routing.defaultLocale}/virtualAccount/authOTP`)
+        }
+    }
+
+    const handleOnclickBack = () => {
+        router.push('/')
+    }
 
     return (
         <div className='w-full'>
@@ -22,23 +45,48 @@ const VirtualAcount = () => {
                         title={translate('registerInformation')}
                         containerStyles='flex items-center justify-between w-full px-4 py-8 bg-[#00cc66]'
                         titleStyles='text-white font-bold text-lg'
+                        onClick={handleOnclickBack}
                     />
                 </div>
-                <div className='mt-10 px-4'>
-                    {userInputFiled.map((field) => (
-                        <div className='flex items-center justify-between text-white py-2' key={field.keyField}>
-                            <p>{translate(field.title)}</p>
-                            <p>value</p>
+                {dataUser ? (
+                    <div className='mt-10 px-4'>
+                        <div className='flex items-center justify-between text-white py-2' key={translate('phone')}>
+                            <p>{translate('phone')}</p>
+                            <p>{dataUser.phone}</p>
                         </div>
-                    ))}
-                </div>
+                        <div className='flex items-center justify-between text-white py-2' key={translate('nic')}>
+                            <p>{translate('nic')}</p>
+                            <p>{dataUser.nic}</p>
+                        </div>
+                        <div className='flex items-center justify-between text-white py-2' key={translate('email')}>
+                            <p>{translate('email')}</p>
+                            <p>{dataUser.email}</p>
+                        </div>
+                        <div className='flex items-center justify-between text-white py-2' key={translate('account_name')}>
+                            <p>{translate('account_name')}</p>
+                            <p>{dataUser.account_name}</p>
+                        </div>
+                        <div className='flex items-center justify-between text-white py-2' key={translate('merchant_name')}>
+                            <p>{translate('merchant_name')}</p>
+                            <p>{dataUser.merchant_name}</p>
+                        </div>
+                        <div className='flex items-center justify-between text-white py-2' key={translate('merchant_address')}>
+                            <p>{translate('merchant_address')}</p>
+                            <p>{dataUser.merchant_address}</p>
+                        </div>
+                        <div className='flex items-center justify-between text-white py-2' key={translate('virtual_account_number')}>
+                            <p>{translate('virtual_account_number')}</p>
+                            <p>{dataUser.sub_account_number}</p>
+                        </div>
+                    </div>
+                ) : (<></>)}
                 <div className='fixed bottom-8 inset-x-0 flex flex-col justify-center items-center gap-4'>
                     <div className='py-8'>
-                        <div className="g-recaptcha" data-sitekey={`${process.env.NEXT_PUBLIC_CAPTCHA_SITE_KEY}`}></div>
+                        <RecaptchaComponent onVerify={handleRecapchaChange} />
                     </div>
-                    <Link href={`/${routing.defaultLocale}/virtualAccount/authOTP`} className='w-[90%]'>
-                        <Button className='text-center bg-white py-2 rounded-lg font-bold w-full text-black'>{translate('confirm')}</Button>
-                    </Link>
+                    <div className='w-[90%]'>
+                        <Button onClick={handleNextPage} className='text-center bg-white py-2 rounded-lg font-bold w-full text-black'>{translate('confirm')}</Button>
+                    </div>
                     <Link href='/' className='w-[90%]'>
                         <Button className='text-center font-bold bg-black/30 py-2 rounded-lg text-white w-full'>{translate('back')}</Button>
                     </Link>
@@ -78,27 +126,49 @@ const VirtualAcount = () => {
                     </div>
                     <div className='hidden sm:block w-full text-white'>
                         <div className='flex items-center justify-center'>
-                            <div className='mt-10 px-4 w-[30%]'>
-                                {userInputFiled.map((field) => (
-                                    <div className='flex items-center justify-between text-white py-2' key={field.keyField}>
-                                        <p>{translate(field.title)}</p>
-                                        <p>value</p>
+                            {dataUser ? (
+                                <div className='mt-10 px-4 sm:w-[30%]'>
+                                    <div className='flex items-center justify-between text-white py-2' key={translate('phone')}>
+                                        <p>{translate('phone')}</p>
+                                        <p>{dataUser.phone}</p>
                                     </div>
-                                ))}
-                            </div>
+                                    <div className='flex items-center justify-between text-white py-2' key={translate('nic')}>
+                                        <p>{translate('nic')}</p>
+                                        <p>{dataUser.nic}</p>
+                                    </div>
+                                    <div className='flex items-center justify-between text-white py-2' key={translate('email')}>
+                                        <p>{translate('email')}</p>
+                                        <p>{dataUser.email}</p>
+                                    </div>
+                                    <div className='flex items-center justify-between text-white py-2' key={translate('account_name')}>
+                                        <p>{translate('account_name')}</p>
+                                        <p>{dataUser.account_name}</p>
+                                    </div>
+                                    <div className='flex items-center justify-between text-white py-2' key={translate('merchant_name')}>
+                                        <p>{translate('merchant_name')}</p>
+                                        <p>{dataUser.merchant_name}</p>
+                                    </div>
+                                    <div className='flex items-center justify-between text-white py-2' key={translate('merchant_address')}>
+                                        <p>{translate('merchant_address')}</p>
+                                        <p>{dataUser.merchant_address}</p>
+                                    </div>
+                                    <div className='flex items-center justify-between text-white py-2' key={translate('virtual_account_number')}>
+                                        <p>{translate('virtual_account_number')}</p>
+                                        <p>{ }</p>
+                                    </div>
+                                </div>
+                            ) : (<></>)}
                         </div>
                         <div>
                             <div className="mt-10 flex items-center justify-center">
                                 <div className='py-8'>
-                                    <div className="g-recaptcha" data-sitekey={`${process.env.NEXT_PUBLIC_CAPTCHA_SITE_KEY}`}></div>
+                                    <RecaptchaComponent onVerify={handleRecapchaChange} />
                                 </div>
                             </div>
                             <div className="flex items-center justify-center mt-10">
                                 <div className='w-[40%] flex justify-between gap-4'>
                                     <div className='w-1/2'>
-                                        <Link href={`/${routing.defaultLocale}/virtualAccount/authOTP`} className='w-full'>
-                                            <Button className='text-center bg-white py-2 rounded-lg font-bold w-full text-black'>{translate('confirm')}</Button>
-                                        </Link>
+                                        <Button onClick={handleNextPage} className='text-center bg-white py-2 rounded-lg font-bold w-full text-black'>{translate('confirm')}</Button>
                                     </div>
                                     <div className='w-1/2'>
                                         <a href='/' className='w-full'>

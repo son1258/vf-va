@@ -1,16 +1,26 @@
+"use client"
+
 import React from 'react';
 import SuccessIcon from '@/../public/done.svg';
 import CircleSuccessIcon from '@/../public/success.svg';
 import { useTranslations } from 'next-intl';
-import { userInputFiled } from '@/constants';
 import Link from 'next/link';
 import { Button } from '@mui/material';
 import Title from '@/app/components/title';
 import Image from 'next/image';
 import FilledIcon from '@/../public/filled.svg';
+import { useRouter } from 'next/navigation';
 
 const Success = () => {
     const translate = useTranslations();
+    const getDataUser = localStorage.getItem('dataUser');
+    const dataUser = getDataUser ? JSON.parse(getDataUser) : null;
+    const router = useRouter();
+
+    const handleOnclickBack = () => {
+        router.push('/')
+    }
+
     return (
         <div className='text-white'>
             <div className='w-full sm:hidden'>
@@ -18,6 +28,7 @@ const Success = () => {
                     title={translate('service')}
                     containerStyles='flex items-center justify-between w-full px-4 py-8 bg-[#00cc66]'
                     titleStyles='text-white font-bold text-lg'
+                    onClick={handleOnclickBack}
                 />
             </div>
             <div className='hidden sm:flex items-center justify-center pb-8 pt-20'>
@@ -55,16 +66,38 @@ const Success = () => {
             </div>
             <p className='text-center font-bold text-lg py-4'>{translate('registerSuccess')}</p>
             <div className='sm:flex sm:items-center sm:justify-center'>
-                <div className='sm:w-[30%]'>
-                    <div className='px-2 w-full'>
-                        {userInputFiled.map((field) => (
-                            <div key={field.keyField} className='py-2 flex items-center justify-between'>
-                                <p>{translate(`${field.title}`)}</p>
-                                <p>value</p>
-                            </div>
-                        ))}
+                {dataUser ? (
+                    <div className='mt-10 px-4 sm:w-[30%]'>
+                        <div className='flex items-center justify-between text-white py-2' key={translate('phone')}>
+                            <p>{translate('phone')}</p>
+                            <p>{dataUser.phone}</p>
+                        </div>
+                        <div className='flex items-center justify-between text-white py-2' key={translate('nic')}>
+                            <p>{translate('nic')}</p>
+                            <p>{dataUser.nic}</p>
+                        </div>
+                        <div className='flex items-center justify-between text-white py-2' key={translate('email')}>
+                            <p>{translate('email')}</p>
+                            <p>{dataUser.email}</p>
+                        </div>
+                        <div className='flex items-center justify-between text-white py-2' key={translate('account_name')}>
+                            <p>{translate('account_name')}</p>
+                            <p>{dataUser.account_name}</p>
+                        </div>
+                        <div className='flex items-center justify-between text-white py-2' key={translate('merchant_name')}>
+                            <p>{translate('merchant_name')}</p>
+                            <p>{dataUser.merchant_name}</p>
+                        </div>
+                        <div className='flex items-center justify-between text-white py-2' key={translate('merchant_address')}>
+                            <p>{translate('merchant_address')}</p>
+                            <p>{dataUser.merchant_address}</p>
+                        </div>
+                        <div className='flex items-center justify-between text-white py-2' key={translate('virtual_account_number')}>
+                            <p>{translate('virtual_account_number')}</p>
+                            <p>{ }</p>
+                        </div>
                     </div>
-                </div>
+                ) : (<></>)}
             </div>
             <Link href='/' className='px-4 w-full flex items-center justify-center mt-20'>
                 <Button className='text-black py-2 bg-white w-full sm:w-[20%] text-center rounded-lg font-bold'>{translate('success')}</Button>

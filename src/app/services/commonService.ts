@@ -4,6 +4,10 @@ export const checkPhoneNumber = (phoneNumber: string) => {
 }
 
 export const checkFormatNumber = (identificationNumber: string, numberFrom: number, numberTo: number) => {
-    let formatNumberRegex = new RegExp(`^[0-9]{${numberFrom}, ${numberTo}}$`)
+    let formatNumberRegex = new RegExp(`^[0-9]{${numberFrom},${numberTo}}$`);
     return formatNumberRegex.test(identificationNumber);
-}
+};
+
+export const concatenateCharacter = (characters: any) => {
+    return Object.values(characters).join('')
+};
